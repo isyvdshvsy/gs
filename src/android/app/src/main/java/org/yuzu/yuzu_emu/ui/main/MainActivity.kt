@@ -132,30 +132,7 @@ class MainActivity : AppCompatActivity(), ThemeProvider {
                 )
             )
         }
-        val keysDirPath = applicationContext.filesDir.absolutePath + "/keys/"
-        val keysDir = File(keysDirPath)
-        if (!keysDir.exists()) {
-    keysDir.mkdir()
-    
-    try {
-        val inputStream = applicationContext.assets.open("prod.keys")
-        val outputStream = FileOutputStream(keysDirPath + "prod.keys")
-        val bufferedInputStream = BufferedInputStream(inputStream)
-        val bufferedOutputStream = BufferedOutputStream(outputStream)
-        val buffer = ByteArray(1024)
-        var length: Int
-        while (bufferedInputStream.read(buffer).also { length = it } != -1) {
-            bufferedOutputStream.write(buffer, 0, length)
-        }
-        bufferedInputStream.close()
-        bufferedOutputStream.close()
-    } catch (e: IOException) {
-        e.printStackTrace()
-    }
-} else {
-    println("Keys directory already exists.")
-}
-
+        
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         setUpNavigation(navHostFragment.navController)
@@ -172,7 +149,6 @@ class MainActivity : AppCompatActivity(), ThemeProvider {
                 }
             }
         }
-
         // Prevents navigation from being drawn for a short time on recreation if set to hidden
         if (!homeViewModel.navigationVisible.value.first) {
             binding.navigationView.visibility = View.INVISIBLE
