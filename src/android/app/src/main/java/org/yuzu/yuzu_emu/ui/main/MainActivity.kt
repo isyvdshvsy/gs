@@ -135,7 +135,6 @@ class MainActivity : AppCompatActivity(), ThemeProvider {
                 )
             )
         }
-        
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         setUpNavigation(navHostFragment.navController)
